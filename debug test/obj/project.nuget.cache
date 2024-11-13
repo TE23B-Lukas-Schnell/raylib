@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "/MvMeE91M4I=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lukas.schnell\\.nuget\\packages\\raylib-cs\\6.1.1\\raylib-cs.6.1.1.nupkg.sha512",
+    "C:\\Users\\lukas.schnell\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
