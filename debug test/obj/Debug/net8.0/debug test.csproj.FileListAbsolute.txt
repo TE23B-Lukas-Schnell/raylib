@@ -42,3 +42,4 @@ C:\Users\lukas.schnell\Documents\programmering 1\raylib\debug test\obj\Debug\net
 C:\Users\lukas.schnell\Documents\programmering 1\raylib\debug test\obj\Debug\net8.0\debug test.pdb
 C:\Users\lukas.schnell\Documents\programmering 1\raylib\debug test\obj\Debug\net8.0\debug test.genruntimeconfig.cache
 C:\Users\lukas.schnell\Documents\programmering 1\raylib\debug test\obj\Debug\net8.0\ref\debug test.dll
+C:\Users\lukas.schnell\Documents\programmering 1\raylib\debug test\obj\Debug\net8.0\debug test.sourcelink.json
