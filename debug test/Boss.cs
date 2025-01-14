@@ -4,44 +4,52 @@ abstract class Boss : MoveableObject
     public float damageMultiplier;
     public float moveSpeed;
 
+
     abstract public void MoveCycle();
     abstract public void Attack1();
     abstract public void Attack2();
     abstract public void Attack3();
     abstract public void Attack4();
 
+
 }
+
 
 class Enemy : Boss
 {
     Color color = new Color(255, 60, 35, 255);
     public override void MoveCycle()
     {
-        if (x < SystemVariables.windowWidth)
+        if (x < Setup.windowWidth)
         {
             xSpeed = moveSpeed;
         }
-        if(x > SystemVariables.windowWidth){
+        if(x > Setup.windowWidth){
             xSpeed = -moveSpeed;
         }
-        
+       
     }
     public override void Attack1()
     {
+
 
     }
     public override void Attack2()
     {
 
+
     }
     public override void Attack3()
     {
+
 
     }
     public override void Attack4()
     {
 
+
     }
+
 
     public override void Update()
     {
@@ -54,6 +62,7 @@ class Enemy : Boss
         Raylib.DrawRectangle((int)x, (int)y, (int)size, (int)size, color);
     }
 
+
     public Enemy(int x, int y, float size)
     {
         this.x = x;
@@ -62,5 +71,8 @@ class Enemy : Boss
         gameList.Add(this);
     }
 }
+
+
+
 
 
