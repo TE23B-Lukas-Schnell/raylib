@@ -9,8 +9,8 @@ Raylib.InitWindow(Setup.windowWidth, Setup.windowHeight, "Game");
 if (Setup.fullscreen) Raylib.ToggleFullscreen();
 
 
-Player player = new Player(800, 450, 69);
-Enemy bert = new Enemy(1400,0,158);
+new Player(800, 450, 69);
+new Enemy(1400, 0, 158);
 
 
 while (!Raylib.WindowShouldClose())
@@ -22,7 +22,10 @@ while (!Raylib.WindowShouldClose())
         MoveableObject.gameList[i].Update();
         MoveableObject.gameList[i].Draw();
     }
-
+    for (int i = 0; i < MoveableObject.gameList.Count; i++)
+    {
+        Console.WriteLine(MoveableObject.gameList[i]);
+    }
 
     Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 50, Color.Black);
     Raylib.DrawText($"width: {Raylib.GetScreenWidth()}", 0, 100, 50, Color.Black);

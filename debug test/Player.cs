@@ -7,7 +7,7 @@ class Player : MoveableObject
     public float setDashDuration = 0.2f;
     public float setDashCooldown = 0.43f;
     public float dashSpeed = 2000f;
-    public float fastFallSpeed = 1200f;
+    public float fastFallSpeed = 1400f;
 
 
     Color color = new Color(12, 0, 235, 255);
@@ -69,9 +69,12 @@ class Player : MoveableObject
             dashCooldown = setDashCooldown;
         }
 
-         if (Raylib.IsKeyDown(KeyboardKey.X) || Raylib.IsKeyDown(KeyboardKey.L)){
-            
-         }
+        if (Raylib.IsKeyDown(KeyboardKey.X) || Raylib.IsKeyDown(KeyboardKey.L))
+        {
+            // shooting script
+            //PlayerBullet bullet = new PlayerBullet(x,y);
+          new PlayerBullet(x,y);
+        }
 
         MoveObject();
     }

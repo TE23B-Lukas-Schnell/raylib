@@ -1,7 +1,3 @@
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
-
-
 abstract class MoveableObject()
 {
     public float x, y;
