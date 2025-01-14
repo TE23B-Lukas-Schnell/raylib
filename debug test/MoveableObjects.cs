@@ -12,10 +12,8 @@ abstract class MoveableObject()
     public bool canGoOffscreen = false;
     public static List<MoveableObject> gameList = new List<MoveableObject>();
 
-
     (float x, float y)[] lastPositions = new (float x, float y)[20];
     int positionIndex = 0;
-
 
     public void AddTrailEffects(Color trailColorSet, float rMultiplier, float gMultiPlier, float bMultiplier, float aMultiplier)
     {
@@ -31,12 +29,10 @@ abstract class MoveableObject()
 
             float trailTime = (float)(lastPositions.Length - i) / lastPositions.Length;
             Color trailColor = new Color(trailColorSet.R + (int)(rMultiplier * trailTime), trailColorSet.G + (int)(gMultiPlier * trailTime), trailColorSet.B + (int)(bMultiplier * trailTime), trailColorSet.A + (int)(aMultiplier * trailTime));
-           
+
             Raylib.DrawRectangle((int)pos.x, (int)pos.y, (int)size, (int)size, trailColor);
         }
     }
-   
-
 
     public void MoveObject()
     {
@@ -56,11 +52,10 @@ abstract class MoveableObject()
 
         if (!canGoOffscreen)
         {
-            x = Math.Clamp(x, 0,  Raylib.GetScreenWidth() - size);
+            x = Math.Clamp(x, 0, Raylib.GetScreenWidth() - size);
             y = Math.Clamp(y, size, Raylib.GetScreenHeight() - size);
         }
     }
-
 
     abstract public void Update();
     abstract public void Draw();

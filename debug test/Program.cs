@@ -13,8 +13,6 @@ Player player = new Player(800, 450, 69);
 Enemy bert = new Enemy(1400,0,158);
 
 
-
-
 while (!Raylib.WindowShouldClose())
 {
     Raylib.BeginDrawing();

@@ -50,7 +50,6 @@ class Player : MoveableObject
         if (Raylib.IsKeyDown(KeyboardKey.LeftShift) && dashCooldown == 0 || Raylib.IsKeyDown(KeyboardKey.C) && dashCooldown == 0)
         {
 
-
             if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.Left))
             {
                 dashSpeed = -dashSpeed;
@@ -63,7 +62,6 @@ class Player : MoveableObject
             }
         }
 
-
         if (dashDuration > 0)
         {
             xSpeed = dashSpeed;
@@ -71,6 +69,9 @@ class Player : MoveableObject
             dashCooldown = setDashCooldown;
         }
 
+         if (Raylib.IsKeyDown(KeyboardKey.X) || Raylib.IsKeyDown(KeyboardKey.L)){
+            
+         }
 
         MoveObject();
     }

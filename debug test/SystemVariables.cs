@@ -3,8 +3,8 @@
 class Setup()
 {
     public static int targetFrameRate;
-    public static int windowWidth = 1600;
-    public static int windowHeight = 900;
+    public static int windowWidth = 640;
+    public static int windowHeight = 360;
     public static bool fullscreen = false;
 
 
@@ -35,8 +35,8 @@ class Setup()
         if (answer == "y")
         {
             fullscreen = true;
-            windowWidth =  Raylib.GetMonitorWidth(0);
-            windowHeight = Raylib.GetMonitorHeight(0);  
+            windowWidth = Raylib.GetMonitorWidth(0);
+            windowHeight = Raylib.GetMonitorHeight(0);
         }
     }
 
