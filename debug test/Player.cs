@@ -2,29 +2,29 @@ class Player : MoveableObject
 {
     public float dashDuration = 0;
     public float dashCooldown = 0;
+    public float shootCooldown = 0;
+
     public float moveSpeed = 900f;
     public float jumpForce = 1300f;
     public float setDashDuration = 0.2f;
     public float setDashCooldown = 0.43f;
     public float dashSpeed = 2000f;
     public float fastFallSpeed = 1400f;
-
+    public float setShootCooldown = 0.5f;
 
     Color color = new Color(12, 0, 235, 255);
 
-
     bool grounded()
     {
-        return y >= Raylib.GetScreenHeight() - size;
+        return y >= Raylib.GetScreenHeight() - width;
     }
-
 
     public override void Update()
     {
         dashCooldown = MathF.Max(dashCooldown - 1 * Raylib.GetFrameTime(), 0);
         dashDuration = MathF.Max(dashDuration - 1 * Raylib.GetFrameTime(), 0);
         gravity = 2300f;
-
+        shootCooldown -= Raylib.GetFrameTime();
 
         if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.Left))
         {
@@ -69,11 +69,10 @@ class Player : MoveableObject
             dashCooldown = setDashCooldown;
         }
 
-        if (Raylib.IsKeyDown(KeyboardKey.X) || Raylib.IsKeyDown(KeyboardKey.L))
+        if (Raylib.IsKeyDown(KeyboardKey.X) && shootCooldown <= 0 || Raylib.IsKeyDown(KeyboardKey.L) && shootCooldown <= 0)
         {
-            // shooting script
-            //PlayerBullet bullet = new PlayerBullet(x,y);
-          new PlayerBullet(x,y);
+            shootCooldown = setShootCooldown;
+            new PlayerBullet(x, y, 40, 20);
         }
 
         MoveObject();
@@ -90,15 +89,16 @@ class Player : MoveableObject
         {
             AddTrailEffects(new Color(0, 88, 255, 0), 100, 100, 0, 130);
         }
-        Raylib.DrawRectangle((int)x, (int)y, (int)size, (int)size, color);
+        Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, color);
     }
 
 
-    public Player(int x, int y, float size)
+    public Player(int x, int y, float width, float height)
     {
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.width = width;
+        this.height = height;
         gameList.Add(this);
     }
 }

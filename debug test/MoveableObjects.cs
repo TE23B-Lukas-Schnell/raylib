@@ -2,11 +2,14 @@ abstract class MoveableObject()
 {
     public float x, y;
     public float xSpeed, ySpeed;
-    public float size;
+    public float width, height;
     public float gravity; // put zero for no gravity
     public static float globalGravity = 1;
     public bool canGoOffscreen = false;
     public static List<MoveableObject> gameList = new List<MoveableObject>();
+    public static List<MoveableObject> removeList = new List<MoveableObject>();
+
+    public bool remove = false;
 
     (float x, float y)[] lastPositions = new (float x, float y)[20];
     int positionIndex = 0;
@@ -26,7 +29,7 @@ abstract class MoveableObject()
             float trailTime = (float)(lastPositions.Length - i) / lastPositions.Length;
             Color trailColor = new Color(trailColorSet.R + (int)(rMultiplier * trailTime), trailColorSet.G + (int)(gMultiPlier * trailTime), trailColorSet.B + (int)(bMultiplier * trailTime), trailColorSet.A + (int)(aMultiplier * trailTime));
 
-            Raylib.DrawRectangle((int)pos.x, (int)pos.y, (int)size, (int)size, trailColor);
+            Raylib.DrawRectangle((int)pos.x, (int)pos.y, (int)width, (int)width, trailColor);
         }
     }
 
@@ -36,7 +39,7 @@ abstract class MoveableObject()
         y -= ySpeed * Raylib.GetFrameTime();
 
 
-        if (y <= Raylib.GetScreenHeight() - size)
+        if (y <= Raylib.GetScreenHeight() - width)
         {
             ySpeed -= gravity * globalGravity * Raylib.GetFrameTime();
         }
@@ -45,14 +48,23 @@ abstract class MoveableObject()
             ySpeed = 0;
         }
 
-
         if (!canGoOffscreen)
         {
-            x = Math.Clamp(x, 0, Raylib.GetScreenWidth() - size);
-            y = Math.Clamp(y, size, Raylib.GetScreenHeight() - size);
+            x = Math.Clamp(x, 0, Raylib.GetScreenWidth() - width);
+            y = Math.Clamp(y, width, Raylib.GetScreenHeight() - width);
+        }
+
+        if (canGoOffscreen)
+        {
+            bool isOffscreen = x + width < 0 || x > Raylib.GetScreenWidth() ||
+            y + height < 0 || y > Raylib.GetScreenHeight();
+
+            if (isOffscreen)
+            {
+                remove = true;
+            }
         }
     }
-
     abstract public void Update();
     abstract public void Draw();
 }

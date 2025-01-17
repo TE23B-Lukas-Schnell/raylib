@@ -10,7 +10,7 @@ class Enemy : Boss
         {
             xSpeed = moveSpeed;
         }
-        if (x == Raylib.GetScreenWidth() - size)
+        if (x == Raylib.GetScreenWidth() - width)
         {
             movingLeft = true;
             xSpeed = -moveSpeed;
@@ -51,7 +51,7 @@ class Enemy : Boss
     }
     public override void Draw()
     {
-        Raylib.DrawRectangle((int)x, (int)y, (int)size, (int)size, color);
+        Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, color);
     }
 
 
@@ -59,7 +59,7 @@ class Enemy : Boss
     {
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.width = size;
         gameList.Add(this);
     }
 }
