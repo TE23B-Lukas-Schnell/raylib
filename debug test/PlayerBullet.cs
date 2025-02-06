@@ -1,12 +1,10 @@
-class PlayerBullet : Bullet
+class PlayerBullet : MoveableObject
 {
     Color color = new Color(255, 0, 0, 255);
+
     public override void Update()
     {
-        canGoOffscreen = true;
-        gravity = 0;
-        xSpeed = 2000;
-        MoveObject();
+        MoveObject(0f);
     }
 
     public override void Draw()
@@ -21,5 +19,7 @@ class PlayerBullet : Bullet
         this.width = width;
         this.height = height;
         gameList.Add(this);
+        xSpeed = 2000;
+        canGoOffscreen = true;
     }
 }

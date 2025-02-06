@@ -1,1 +1,0 @@
-//köttar ner informationen

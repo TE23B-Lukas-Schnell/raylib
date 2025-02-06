@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj": {}
+    "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj": {}
   },
   "projects": {
-    "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj": {
+    "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj",
+        "projectUniqueName": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj",
         "projectName": "debug test",
-        "projectPath": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj",
+        "projectPath": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj",
         "packagesPath": "C:\\Users\\lukas.schnell\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\obj\\",
+        "outputPath": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lukas.schnell\\AppData\\Roaming\\NuGet\\NuGet.Config"
