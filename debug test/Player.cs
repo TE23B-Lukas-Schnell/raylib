@@ -1,9 +1,12 @@
 class Player : MoveableObject
 {
+
     public float dashDuration = 0;
     public float dashCooldown = 0;
     public float shootCooldown = 0;
 
+    //konstanter
+    public float gravity = 2300f;
     public float moveSpeed = 900f;
     public float jumpForce = 1300f;
     public float setDashDuration = 0.2f;
@@ -11,74 +14,89 @@ class Player : MoveableObject
     public float dashSpeed = 2000f;
     public float fastFallSpeed = 1400f;
     public float setShootCooldown = 0.5f;
-
     Color color = new Color(12, 0, 235, 255);
+    public float bulletWidth = 40;
+    public float bulletHeight = 20;
 
-    bool grounded()
+    public bool Grounded() => y >= Raylib.GetScreenHeight() - width;
+    public bool LeftKeyPressed() => Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.Left);
+    public bool RightKeyPressed() => Raylib.IsKeyDown(KeyboardKey.D) || Raylib.IsKeyDown(KeyboardKey.Right);
+    public bool DownKeyPressed() => Raylib.IsKeyDown(KeyboardKey.S) || Raylib.IsKeyDown(KeyboardKey.Down);
+    public bool UpKeyPressed() => Raylib.IsKeyDown(KeyboardKey.W) || Raylib.IsKeyDown(KeyboardKey.Up);
+    public bool JumpKeyPressed() => Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsKeyDown(KeyboardKey.Z);
+    public bool DashKeyPressed() => Raylib.IsKeyDown(KeyboardKey.LeftShift) || Raylib.IsKeyDown(KeyboardKey.C);
+    public bool ShootKeyPressed() => Raylib.IsKeyDown(KeyboardKey.L) || Raylib.IsKeyDown(KeyboardKey.X);
+
+    public void MovingLeftAndRight()
     {
-        return y >= Raylib.GetScreenHeight() - width;
-    }
-
-    public void DecreaseCooldowns()
-    {
-        dashCooldown = MathF.Max(dashCooldown - 1 * Raylib.GetFrameTime(), 0);
-        dashDuration = MathF.Max(dashDuration - 1 * Raylib.GetFrameTime(), 0);
-        shootCooldown -= Raylib.GetFrameTime();
-    }
-
-    
-
-    public override void Update()
-    {
-        DecreaseCooldowns();
-
-        if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.Left))
+        if (LeftKeyPressed())
         {
             xSpeed = -moveSpeed;
         }
-        else if (Raylib.IsKeyDown(KeyboardKey.D) || Raylib.IsKeyDown(KeyboardKey.Right))
+        else if (RightKeyPressed())
         {
             xSpeed = moveSpeed;
         }
         else xSpeed = 0;
-
-        if (Raylib.IsKeyDown(KeyboardKey.S) && !grounded() || Raylib.IsKeyDown(KeyboardKey.Down) && !grounded())
+    }
+    public void FastFalling()
+    {
+        if (DownKeyPressed() && !Grounded())
         {
             ySpeed = -fastFallSpeed;
         }
-
-        if (Raylib.IsKeyDown(KeyboardKey.Space) && grounded() || Raylib.IsKeyDown(KeyboardKey.Z) && grounded())
+    }
+    public void Jumping()
+    {
+        if (JumpKeyPressed() && Grounded())
         {
             ySpeed = jumpForce;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.LeftShift) && dashCooldown == 0 || Raylib.IsKeyDown(KeyboardKey.C) && dashCooldown == 0)
+    }
+    public void Dashing()
+    {
+        if (DashKeyPressed() && dashCooldown == 0)
         {
-
-            if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.Left))
+            if (LeftKeyPressed())
             {
                 dashSpeed = -dashSpeed;
                 dashDuration = setDashDuration;
             }
-            else if (Raylib.IsKeyDown(KeyboardKey.D) || Raylib.IsKeyDown(KeyboardKey.Right))
+            else if (RightKeyPressed())
             {
                 dashSpeed = Math.Abs(dashSpeed);
                 dashDuration = setDashDuration;
             }
         }
-
-        if (dashDuration > 0)
+         if (dashDuration > 0)
         {
             xSpeed = dashSpeed;
             ySpeed = 0;
             dashCooldown = setDashCooldown;
         }
-
-        if (Raylib.IsKeyDown(KeyboardKey.X) && shootCooldown <= 0 || Raylib.IsKeyDown(KeyboardKey.L) && shootCooldown <= 0)
+    }
+    public void Shooting()
+    {
+        if (ShootKeyPressed() && shootCooldown <= 0)
         {
             shootCooldown = setShootCooldown;
-            new PlayerBullet(x, y, 40, 20);
+            new PlayerBullet(x, y, bulletWidth, bulletHeight);
         }
-        MoveObject(2300f);
+
+    }
+    public override void Update()
+    {
+        dashCooldown = MathF.Max(dashCooldown - Raylib.GetFrameTime(), 0);
+        dashDuration = MathF.Max(dashDuration - Raylib.GetFrameTime(), 0);
+        shootCooldown = MathF.Max(shootCooldown - Raylib.GetFrameTime(), 0);
+        
+        MovingLeftAndRight();
+        FastFalling();
+        Jumping();
+        Dashing();
+        Shooting();
+
+        MoveObject(gravity);
     }
 
     public override void Draw()
@@ -95,12 +113,12 @@ class Player : MoveableObject
     }
 
 
-    public Player(int x, int y, float width, float height)
+    public Player(int x, int y)
     {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        width = Setup.windowWidth * 0.05f;
+        height = Setup.windowWidth * 0.05f;
         gameList.Add(this);
     }
 }

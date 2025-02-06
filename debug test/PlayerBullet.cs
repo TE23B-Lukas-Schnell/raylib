@@ -1,10 +1,11 @@
 class PlayerBullet : MoveableObject
 {
+    public float gravity = 0;
     Color color = new Color(255, 0, 0, 255);
 
     public override void Update()
-    {
-        MoveObject(0f);
+    {      
+        MoveObject(gravity);
     }
 
     public override void Draw()
@@ -21,5 +22,6 @@ class PlayerBullet : MoveableObject
         gameList.Add(this);
         xSpeed = 2000;
         canGoOffscreen = true;
+
     }
 }

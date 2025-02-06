@@ -3,15 +3,15 @@ abstract class MoveableObject()
     public float x, y;
     public float xSpeed, ySpeed;
     public float width, height;
-    public float gravity;
     public bool canGoOffscreen = false;
     (float x, float y)[] lastPositions = new (float x, float y)[20];
     int positionIndex = 0;
     public bool remove = false;
+    public Rectangle GetHitbox() => new Rectangle(x,y,width,height);
 
-    //lista för alla objekt som ska hanteras, det är
+    //lista för alla objekt som ska hanteras, det är lista för att den kan öka och minska under runtime
     public static List<MoveableObject> gameList = new List<MoveableObject>();
-    public static float globalGravity = 1;
+    public static float globalGravityMultiplier = 1;
 
     //denna funktion gjordes av chatgpt
     public void AddTrailEffects(Color trailColorSet, float rMultiplier, float gMultiPlier, float bMultiplier, float aMultiplier)
@@ -60,7 +60,7 @@ abstract class MoveableObject()
 
         if (y <= Raylib.GetScreenHeight() - width)
         {
-            ySpeed -= gravity * globalGravity * Raylib.GetFrameTime();
+            ySpeed -= gravity * globalGravityMultiplier * Raylib.GetFrameTime();
         }
         else
         {
