@@ -11,8 +11,9 @@ class PlayerBullet : MoveableObject
     public override void Draw()
     {
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
+        ShowHitboxes();
     }
-
+    
     public PlayerBullet(float x, float y, float width, float height)
     {
         this.x = x;
@@ -22,6 +23,6 @@ class PlayerBullet : MoveableObject
         gameList.Add(this);
         xSpeed = 2000;
         canGoOffscreen = true;
-
+        collisionType = "";
     }
 }

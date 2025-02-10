@@ -11,7 +11,7 @@ new Enemy(1400, 0);
 //main loop
 while (!Raylib.WindowShouldClose())
 {
-    Console.Clear(); 
+    // Console.Clear(); 
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.White);
     for (int i = 0; i < MoveableObject.gameList.Count; i++)

@@ -3,7 +3,7 @@ class Enemy : MoveableObject
     public float moveSpeed;
     public float gravity = 2300f;
     bool movingLeft = false;
-    Color color = new Color(255, 60, 35, 255);
+    Color color = new Color(60, 255, 125, 255);
 
     public override void Update()
     {
@@ -25,6 +25,7 @@ class Enemy : MoveableObject
     public override void Draw()
     {
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, color);
+        ShowHitboxes();
     }
 
     public Enemy(int x, int y)
@@ -36,4 +37,6 @@ class Enemy : MoveableObject
         moveSpeed = 500f;
     }
 }
+
+
 
