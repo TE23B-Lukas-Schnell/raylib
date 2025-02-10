@@ -27,7 +27,7 @@ abstract class MoveableObject()
         {
             if (obj != this) // Avoid self-collision
             {
-                if (Raylib.CheckCollisionRecs(this.GetHitbox(), obj.GetHitbox()))
+                if (Raylib.CheckCollisionRecs(GetHitbox(), obj.GetHitbox()))
                 {
                     return obj.collisionType;
                     // Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk");
