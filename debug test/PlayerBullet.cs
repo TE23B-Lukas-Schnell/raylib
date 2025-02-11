@@ -1,16 +1,24 @@
-class PlayerBullet : MoveableObject
+class PlayerBullet : Bullet
 {
     public float gravity = 0;
     Color color = new Color(255, 0, 0, 255);
 
     public override void Update()
-    {      
+    {
+        MoveableObject target = CheckCollisions();
+        if (target is Enemy)
+        {
+            target.TakeDamage(damage, target);
+            remove = true;
+            Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk");
+        }
         MoveObject(gravity);
     }
 
     public override void Draw()
     {
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
+        ShowHitboxes();
     }
 
     public PlayerBullet(float x, float y, float width, float height)
@@ -22,6 +30,6 @@ class PlayerBullet : MoveableObject
         gameList.Add(this);
         xSpeed = 2000;
         canGoOffscreen = true;
-
+        damage = 10;
     }
 }

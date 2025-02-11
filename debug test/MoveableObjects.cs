@@ -1,17 +1,51 @@
 abstract class MoveableObject()
 {
+    //lista för alla objekt som ska hanteras, det är lista för att den kan öka och minska under runtime
+    public static List<MoveableObject> gameList = new List<MoveableObject>();
+    public static float globalGravityMultiplier = 1;
+
+    public float hp;
+    public float damageMultiplier;
     public float x, y;
     public float xSpeed, ySpeed;
     public float width, height;
     public bool canGoOffscreen = false;
+    public bool remove = false;
+
+
+    public Rectangle GetHitbox() => new Rectangle(x, y, width, height);
+    public bool ShowHitboxesSwitch() => Raylib.IsKeyDown(KeyboardKey.W);
+    public void ShowHitboxes()
+    {
+        if (ShowHitboxesSwitch())
+        {
+            Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, Color.Red);
+        }
+    }
+
+    public MoveableObject CheckCollisions()
+    {
+        foreach (MoveableObject obj in gameList)
+        {
+            if (obj != this)
+            {
+                if (Raylib.CheckCollisionRecs(GetHitbox(), obj.GetHitbox()))
+                {
+                    return obj;
+                    // Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk");
+                }
+            }
+        }
+        return this;
+    }
+
+    public void TakeDamage(float damage, MoveableObject target)
+    {
+        target.hp =- damage * damageMultiplier;
+    }
+
     (float x, float y)[] lastPositions = new (float x, float y)[20];
     int positionIndex = 0;
-    public bool remove = false;
-    public Rectangle GetHitbox() => new Rectangle(x,y,width,height);
-
-    //lista för alla objekt som ska hanteras, det är lista för att den kan öka och minska under runtime
-    public static List<MoveableObject> gameList = new List<MoveableObject>();
-    public static float globalGravityMultiplier = 1;
 
     //denna funktion gjordes av chatgpt
     public void AddTrailEffects(Color trailColorSet, float rMultiplier, float gMultiPlier, float bMultiplier, float aMultiplier)

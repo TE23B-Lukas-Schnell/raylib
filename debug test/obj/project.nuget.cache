@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7ddXZZe3rps=",
+  "dgSpecHash": "2PNzQXFM3a8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lukas\\OneDrive\\Dokument\\GitHub\\raylib\\debug test\\debug test.csproj",
+  "projectFilePath": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\raylib\\debug test\\debug test.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\lukas\\.nuget\\packages\\raylib-cs\\7.0.1\\raylib-cs.7.0.1.nupkg.sha512"
+    "C:\\Users\\lukas.schnell\\.nuget\\packages\\raylib-cs\\7.0.1\\raylib-cs.7.0.1.nupkg.sha512"
   ],
   "logs": []
 }
