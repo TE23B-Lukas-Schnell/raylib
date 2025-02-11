@@ -29,6 +29,7 @@ while (!Raylib.WindowShouldClose())
     }
 
     Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 30, Color.Black);
+    
+    
     Raylib.EndDrawing();
 }
-

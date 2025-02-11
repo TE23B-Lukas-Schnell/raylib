@@ -5,7 +5,7 @@ abstract class MoveableObject()
     public static float globalGravityMultiplier = 1;
 
     public float hp;
-    public float damageMultiplier;
+    public float damageMultiplier = 1;
     public float x, y;
     public float xSpeed, ySpeed;
     public float width, height;
@@ -19,7 +19,7 @@ abstract class MoveableObject()
     {
         if (ShowHitboxesSwitch())
         {
-            Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, Color.Red);
+            Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, Color.Red);
         }
     }
 
@@ -32,16 +32,20 @@ abstract class MoveableObject()
                 if (Raylib.CheckCollisionRecs(GetHitbox(), obj.GetHitbox()))
                 {
                     return obj;
-                    // Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk");
+                    // Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk av jack");
                 }
             }
         }
-        return this;
+        return null;
     }
 
     public void TakeDamage(float damage, MoveableObject target)
     {
-        target.hp =- damage * damageMultiplier;
+        target.hp -= damage * damageMultiplier;
+        if (hp <= 0)
+        {
+            target.remove = true;
+        }
     }
 
     (float x, float y)[] lastPositions = new (float x, float y)[20];

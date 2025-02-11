@@ -5,13 +5,7 @@ class PlayerBullet : Bullet
 
     public override void Update()
     {
-        MoveableObject target = CheckCollisions();
-        if (target is Enemy)
-        {
-            target.TakeDamage(damage, target);
-            remove = true;
-            Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk");
-        }
+        OnHit(damage);
         MoveObject(gravity);
     }
 
@@ -30,6 +24,6 @@ class PlayerBullet : Bullet
         gameList.Add(this);
         xSpeed = 2000;
         canGoOffscreen = true;
-        damage = 10;
+        damage = 5;
     }
 }

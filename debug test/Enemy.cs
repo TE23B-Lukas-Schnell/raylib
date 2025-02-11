@@ -13,7 +13,7 @@ class Enemy : MoveableObject
         }
         if (x == Raylib.GetScreenWidth() - width)
         {
-            movingLeft = true;
+            movingLeft = true; 
             xSpeed = -moveSpeed;
         }
         if (x < Raylib.GetScreenWidth() * 0.7)
@@ -24,7 +24,7 @@ class Enemy : MoveableObject
     }
     public override void Draw()
     {
-        Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, color);
+        Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
         ShowHitboxes();
         Raylib.DrawRectangle(50, 50, (int)hp, 50, Color.Green);
     }
@@ -34,11 +34,9 @@ class Enemy : MoveableObject
         this.x = x;
         this.y = y;
         width = Setup.windowWidth * 0.11f;
+        height = Setup.windowWidth * 0.11f;
         gameList.Add(this);
         moveSpeed = 500f;
         hp = 600;
     }
 }
-
-
-

@@ -1,8 +1,8 @@
 abstract class Bullet : MoveableObject
 {
-    public float damage; 
+    public float damage;
 
-    // when you collide with an enemy
+    // when you collide with an enemy, hp is subtracted and you remove the bullet
     public void OnHit(float damage)
     {
         MoveableObject target = CheckCollisions();
@@ -12,8 +12,4 @@ abstract class Bullet : MoveableObject
             remove = true;
         }
     }
-
 }
-
-
-

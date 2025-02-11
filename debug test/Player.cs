@@ -110,7 +110,7 @@ class Player : MoveableObject
         {
             AddTrailEffects(new Color(0, 88, 255, 0), 100, 100, 0, 130);
         }
-        Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, color);
+        Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
         ShowHitboxes();
     }
 
