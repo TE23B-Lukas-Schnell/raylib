@@ -4,13 +4,15 @@ abstract class MoveableObject()
     public static List<MoveableObject> gameList = new List<MoveableObject>();
     public static float globalGravityMultiplier = 1;
 
+    public float hp;
+    public float damageMultiplier;
     public float x, y;
     public float xSpeed, ySpeed;
     public float width, height;
     public bool canGoOffscreen = false;
     public bool remove = false;
 
-    public string collisionType = "";
+
     public Rectangle GetHitbox() => new Rectangle(x, y, width, height);
     public bool ShowHitboxesSwitch() => Raylib.IsKeyDown(KeyboardKey.W);
     public void ShowHitboxes()
@@ -21,20 +23,25 @@ abstract class MoveableObject()
         }
     }
 
-    public string CheckCollisions()
+    public MoveableObject CheckCollisions()
     {
         foreach (MoveableObject obj in gameList)
         {
-            if (obj != this) // Avoid self-collision
+            if (obj != this)
             {
                 if (Raylib.CheckCollisionRecs(GetHitbox(), obj.GetHitbox()))
                 {
-                    return obj.collisionType;
+                    return obj;
                     // Console.WriteLine("${obj} asg nazg durbatuluk asg nazg gimbatul asg nazg thrakatuluk");
                 }
             }
         }
-        return "";
+        return this;
+    }
+
+    public void TakeDamage(float damage, MoveableObject target)
+    {
+        target.hp =- damage * damageMultiplier;
     }
 
     (float x, float y)[] lastPositions = new (float x, float y)[20];

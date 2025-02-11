@@ -26,6 +26,7 @@ class Enemy : MoveableObject
     {
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)width, color);
         ShowHitboxes();
+        Raylib.DrawRectangle(50, 50, (int)hp, 50, Color.Green);
     }
 
     public Enemy(int x, int y)
@@ -35,6 +36,7 @@ class Enemy : MoveableObject
         width = Setup.windowWidth * 0.11f;
         gameList.Add(this);
         moveSpeed = 500f;
+        hp = 600;
     }
 }
 
