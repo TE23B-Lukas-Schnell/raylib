@@ -2,24 +2,31 @@ class Enemy : MoveableObject
 {
     public float moveSpeed;
     public float gravity = 2300f;
-    bool movingLeft = false;
+    
+    bool movingUp = false;
     Color color = new Color(60, 255, 125, 255);
 
-    public override void Update()
+    public void moveInADirection()
     {
-        if (x < Raylib.GetScreenWidth() && !movingLeft)
+        bool moving = false;
+        if (x < Raylib.GetScreenWidth() && !moving)
         {
             xSpeed = moveSpeed;
         }
         if (x == Raylib.GetScreenWidth() - width)
         {
-            movingLeft = true; 
+            moving = true;
             xSpeed = -moveSpeed;
         }
         if (x < Raylib.GetScreenWidth() * 0.7)
         {
-            movingLeft = false;
+            moving = false;
         }
+    }
+
+    public override void Update()
+    {
+
         MoveObject(gravity);
     }
     public override void Draw()
@@ -27,6 +34,10 @@ class Enemy : MoveableObject
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
         ShowHitboxes();
         Raylib.DrawRectangle(50, 50, (int)hp, 50, Color.Green);
+    }
+    public override void Despawn()
+    {
+
     }
 
     public Enemy(int x, int y)

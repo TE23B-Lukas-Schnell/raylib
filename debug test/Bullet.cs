@@ -1,6 +1,7 @@
 abstract class Bullet : MoveableObject
 {
     public float damage;
+    public bool piercing = false;
 
     // when you collide with an enemy, hp is subtracted and you remove the bullet
     public void OnHit(float damage)
@@ -9,7 +10,10 @@ abstract class Bullet : MoveableObject
         if (target is Enemy)
         {
             target.TakeDamage(damage, target);
-            remove = true;
+            if (!piercing)
+            {
+                remove = true;
+            }
         }
     }
 }

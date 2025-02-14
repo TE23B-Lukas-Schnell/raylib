@@ -111,4 +111,6 @@ abstract class MoveableObject()
     abstract public void Update();
     //draw funktionen ritar ut alla rektanglar
     abstract public void Draw();
+    //körs när objektet ska försvinna
+    abstract public void Despawn();
 }

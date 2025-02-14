@@ -113,7 +113,10 @@ class Player : MoveableObject
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
         ShowHitboxes();
     }
-
+    public override void Despawn()
+    {
+        
+    }
 
     public Player(int x, int y)
     {

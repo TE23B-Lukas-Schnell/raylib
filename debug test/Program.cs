@@ -1,4 +1,4 @@
-﻿global using Raylib_cs; 
+﻿global using Raylib_cs;
 global using System;
 
 Raylib.SetTargetFPS(Setup.ChooseFPS());
@@ -18,6 +18,11 @@ while (!Raylib.WindowShouldClose())
     {
         MoveableObject.gameList[i].Update();
         MoveableObject.gameList[i].Draw();
+
+        if (MoveableObject.gameList[i].remove == true)
+        {
+            MoveableObject.gameList[i].Despawn();
+        }
     }
 
     //denna rad skrevs av mikael 
@@ -29,7 +34,7 @@ while (!Raylib.WindowShouldClose())
     }
 
     Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 30, Color.Black);
-    
-    
+
+
     Raylib.EndDrawing();
 }

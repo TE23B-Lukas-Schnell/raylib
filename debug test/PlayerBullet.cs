@@ -14,6 +14,10 @@ class PlayerBullet : Bullet
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
         ShowHitboxes();
     }
+     public override void Despawn()
+    {
+    
+    }
 
     public PlayerBullet(float x, float y, float width, float height)
     {
