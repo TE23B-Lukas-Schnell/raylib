@@ -2,30 +2,26 @@ class Enemy : MoveableObject
 {
     public float moveSpeed;
     public float gravity = 2300f;
-    
-    bool movingUp = false;
+
     Color color = new Color(60, 255, 125, 255);
 
-    public void moveInADirection()
+    public void båtSlashKött(float positionValue, float minValue, float maxValue)
     {
-        bool moving = false;
-        if (x < Raylib.GetScreenWidth() && !moving)
-        {
-            xSpeed = moveSpeed;
+        bool movingToMax = false;
+        if(positionValue >= maxValue){
+            movingToMax = false;
         }
-        if (x == Raylib.GetScreenWidth() - width)
-        {
-            moving = true;
-            xSpeed = -moveSpeed;
+        if(positionValue <= minValue){
+            movingToMax = true;
         }
-        if (x < Raylib.GetScreenWidth() * 0.7)
-        {
-            moving = false;
-        }
+        
     }
 
     public override void Update()
     {
+        // moveInADirection(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth());
+        // moveInADirection(x, 1000, Setup.windowWidth);
+
 
         MoveObject(gravity);
     }
@@ -50,4 +46,23 @@ class Enemy : MoveableObject
         moveSpeed = 500f;
         hp = 600;
     }
+
+    public void moveInADirection(float positionValue, float minPositionValue, float maxPositionValue)
+    {
+        bool movingToMax = true;
+        if (positionValue < maxPositionValue && !movingToMax)
+        {
+            xSpeed = -moveSpeed;
+        }
+        if (x >= Raylib.GetScreenWidth() - width)
+        {
+            movingToMax = false;
+            xSpeed = -moveSpeed;
+        }
+        if (x < minPositionValue)
+        {
+            movingToMax = true;
+        }
+    }
+
 }
