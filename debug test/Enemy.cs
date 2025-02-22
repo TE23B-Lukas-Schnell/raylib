@@ -8,13 +8,24 @@ class Enemy : MoveableObject
     public void båtSlashKött(float positionValue, float minValue, float maxValue)
     {
         bool movingToMax = false;
-        if(positionValue >= maxValue){
+        if (positionValue >= maxValue)
+        {
             movingToMax = false;
         }
-        if(positionValue <= minValue){
+        if (positionValue <= minValue)
+        {
             movingToMax = true;
         }
+
         
+        if (movingToMax)
+        {
+            xSpeed = moveSpeed;
+        }
+        if (!movingToMax)
+        {
+            xSpeed = -moveSpeed;
+        }
     }
 
     public override void Update()
@@ -22,7 +33,7 @@ class Enemy : MoveableObject
         // moveInADirection(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth());
         // moveInADirection(x, 1000, Setup.windowWidth);
 
-
+        båtSlashKött(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth());
         MoveObject(gravity);
     }
     public override void Draw()
