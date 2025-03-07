@@ -15,6 +15,7 @@ abstract class MoveableObject()
 
     public Rectangle GetHitbox() => new Rectangle(x, y, width, height);
     public bool ShowHitboxesSwitch() => Raylib.IsKeyDown(KeyboardKey.W);
+    //enklare att testa programmet och kan hjälpa senare när hitboxes inte matchar spriten
     public void ShowHitboxes()
     {
         if (ShowHitboxesSwitch())
@@ -22,7 +23,7 @@ abstract class MoveableObject()
             Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, Color.Red);
         }
     }
-
+    //returnar objektet som kollideras med 
     public MoveableObject CheckCollisions()
     {
         foreach (MoveableObject obj in gameList)
@@ -39,6 +40,7 @@ abstract class MoveableObject()
         return null;
     }
 
+    //objektet hp minskar, tas bort om det är < 0
     public void TakeDamage(float damage, MoveableObject target)
     {
         target.hp -= damage * damageMultiplier;
@@ -69,6 +71,16 @@ abstract class MoveableObject()
         }
     }
 
+    //funktioner relaterade till positions värden
+
+    // förklarar sig själv tycker jag, positionen kan aldrig gå offscreen
+    public void LimitMovement()
+    {
+        x = Math.Clamp(x, 0, Raylib.GetScreenWidth() - width);
+        y = Math.Clamp(y, width, Raylib.GetScreenHeight() - width);
+    }
+
+
     //tar bort objekt om de är offscreen
     public void RemoveObject()
     {
@@ -84,8 +96,20 @@ abstract class MoveableObject()
         }
         else
         {
-            x = Math.Clamp(x, 0, Raylib.GetScreenWidth() - width);
-            y = Math.Clamp(y, width, Raylib.GetScreenHeight() - width);
+            LimitMovement();
+        }
+    }
+
+    //gör så att objektet blir påverkat av gravitation, specifiera i parametern
+    public void ApplyGravity(float gravity)
+    {
+        if (y <= Raylib.GetScreenHeight() - width)
+        {
+            ySpeed -= gravity * globalGravityMultiplier * Raylib.GetFrameTime();
+        }
+        else
+        {
+            ySpeed = 0;
         }
     }
 
@@ -95,22 +119,20 @@ abstract class MoveableObject()
         x += xSpeed * Raylib.GetFrameTime();
         y -= ySpeed * Raylib.GetFrameTime();
 
-
-        if (y <= Raylib.GetScreenHeight() - width)
-        {
-            ySpeed -= gravity * globalGravityMultiplier * Raylib.GetFrameTime();
-        }
-        else
-        {
-            ySpeed = 0;
-        }
+        ApplyGravity(gravity);
         RemoveObject();
     }
 
-    //update funktionen updaterar alla värden varje frame
+    /// <summary>
+    /// kallas varje frame, ska ändra värden
+    /// </summary>
     abstract public void Update();
-    //draw funktionen ritar ut alla rektanglar
+    /// <summary>
+    /// kallas varje frame, ska rita ut till skärmen
+    /// </summary>
     abstract public void Draw();
-    //körs när objektet ska försvinna
+    /// <summary>
+    /// kallas när objektet försvinner, är förmodligen onödig
+    /// </summary>
     abstract public void Despawn();
 }

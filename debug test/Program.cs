@@ -6,7 +6,7 @@ Raylib.SetTargetFPS(Setup.ChooseFPS());
 Raylib.InitWindow(Setup.windowWidth, Setup.windowHeight, "Game");
 
 new Player(800, 450);
-new Enemy(1400, 0);
+new Enemy((int)(Raylib.GetScreenWidth() * 0.5f), 0);
 
 //main loop
 while (!Raylib.WindowShouldClose())
@@ -16,8 +16,8 @@ while (!Raylib.WindowShouldClose())
     Raylib.ClearBackground(Color.White);
     for (int i = 0; i < MoveableObject.gameList.Count; i++)
     {
-        MoveableObject.gameList[i].Update();
-        MoveableObject.gameList[i].Draw();
+        MoveableObject.gameList[i].Update(); //först uppdatera alla värden
+        MoveableObject.gameList[i].Draw(); // sen ritar man ut allt till skärmen
 
         if (MoveableObject.gameList[i].remove == true)
         {

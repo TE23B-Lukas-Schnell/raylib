@@ -1,3 +1,5 @@
+using System.Reflection.Metadata.Ecma335;
+
 class Enemy : MoveableObject
 {
     public float moveSpeed;
@@ -5,35 +7,21 @@ class Enemy : MoveableObject
 
     Color color = new Color(60, 255, 125, 255);
 
-    public void båtSlashKött(float positionValue, float minValue, float maxValue)
+    public void båtSlashKött(float value, float minValue, float maxValue)
     {
-        bool movingToMax = false;
-        if (positionValue >= maxValue)
+        if (value >= maxValue)
         {
-            movingToMax = false;
+            xSpeed = -Math.Abs(moveSpeed);
         }
-        if (positionValue <= minValue)
+        else if (value <= minValue)
         {
-            movingToMax = true;
-        }
-
-        
-        if (movingToMax)
-        {
-            xSpeed = moveSpeed;
-        }
-        if (!movingToMax)
-        {
-            xSpeed = -moveSpeed;
+            xSpeed = Math.Abs(moveSpeed); 
         }
     }
 
     public override void Update()
     {
-        // moveInADirection(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth());
-        // moveInADirection(x, 1000, Setup.windowWidth);
-
-        båtSlashKött(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth());
+        båtSlashKött(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth() - width);
         MoveObject(gravity);
     }
     public override void Draw()
@@ -58,22 +46,5 @@ class Enemy : MoveableObject
         hp = 600;
     }
 
-    public void moveInADirection(float positionValue, float minPositionValue, float maxPositionValue)
-    {
-        bool movingToMax = true;
-        if (positionValue < maxPositionValue && !movingToMax)
-        {
-            xSpeed = -moveSpeed;
-        }
-        if (x >= Raylib.GetScreenWidth() - width)
-        {
-            movingToMax = false;
-            xSpeed = -moveSpeed;
-        }
-        if (x < minPositionValue)
-        {
-            movingToMax = true;
-        }
-    }
 
 }
