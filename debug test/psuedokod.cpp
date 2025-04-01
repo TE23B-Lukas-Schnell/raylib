@@ -1,6 +1,11 @@
 /*
 
-jag loopar igenom gamelist och utför update och draw funktionen för varje objekt
-sedan tar jag bort alla object som har remove variablen true
+programmet loopar igenom gamelist för varje objekt utför:
 
+kör update funktionen och draw funktionen
+kollar om remove variabeln är true
+    om det är sant så utför den despawn funktionen 
+    sen tas objektet bort
+
+skriver ut fps på skärmen
 */

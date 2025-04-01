@@ -1,5 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-
 class Enemy : MoveableObject
 {
     public float moveSpeed;
@@ -7,7 +5,7 @@ class Enemy : MoveableObject
 
     Color color = new Color(60, 255, 125, 255);
 
-    public void båtSlashKött(float value, float minValue, float maxValue)
+    public void moveCycle(float value, float minValue, float maxValue)
     {
         if (value >= maxValue)
         {
@@ -21,7 +19,7 @@ class Enemy : MoveableObject
 
     public override void Update()
     {
-        båtSlashKött(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth() - width);
+        moveCycle(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth() - width);
         MoveObject(gravity);
     }
     public override void Draw()
