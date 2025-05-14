@@ -17,6 +17,7 @@ class Enemy : MoveableObject
         }
     }
 
+
     public override void Update()
     {
         moveCycle(x, Raylib.GetScreenWidth() * 0.7f, Raylib.GetScreenWidth() - width);

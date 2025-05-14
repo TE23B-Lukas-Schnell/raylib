@@ -2,6 +2,7 @@
 global using System;
 
 Raylib.SetTargetFPS(Setup.ChooseFPS());
+Setup.Intructions();
 
 Raylib.InitWindow(Setup.windowWidth, Setup.windowHeight, "Game");
 

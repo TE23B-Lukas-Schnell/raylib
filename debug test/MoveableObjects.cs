@@ -15,13 +15,13 @@ abstract class MoveableObject()
 
     public Rectangle GetHitbox() => new Rectangle(x, y, width, height);
     public bool ShowHitboxesSwitch() => Raylib.IsKeyDown(KeyboardKey.W);
-    //enklare att testa programmet och kan hjälpa senare när hitboxes inte matchar spriten
-    public void ShowHitboxes()
+
+    public void ShowHitboxes()//enklare att testa programmet och kan hjälpa senare när hitboxes inte matchar spriten
     {
-        if (ShowHitboxesSwitch())
+       /* if (ShowHitboxesSwitch())
         {
             Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, Color.Red);
-        }
+        }*/
     }
     //returnar objektet som kollideras med 
     public MoveableObject CheckCollisions()
