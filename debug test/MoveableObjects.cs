@@ -4,6 +4,8 @@ abstract class MoveableObject()
     public static List<MoveableObject> gameList = new List<MoveableObject>();
     public static float globalGravityMultiplier = 1;
 
+    public string objectIdentifier = "";
+    public float maxHP;
     public float hp;
     public float damageMultiplier = 1;
     public float x, y;
@@ -11,20 +13,27 @@ abstract class MoveableObject()
     public float width, height;
     public bool canGoOffscreen = false;
     public bool remove = false;
+    public bool Grounded() => y >= Raylib.GetScreenHeight() - width;
 
+    public void DisplayHealthBar(float xpos, float ypos, float sizeMultiplier)
+    {
+        Raylib.DrawRectangle((int)xpos, (int)ypos, (int)(maxHP * sizeMultiplier) + 10, 60, Color.Gray);
+        Raylib.DrawRectangle((int)xpos + 5, (int)ypos + 5, (int)(hp * sizeMultiplier), 50, Color.Green);
+    }
 
     public Rectangle GetHitbox() => new Rectangle(x, y, width, height);
     public bool ShowHitboxesSwitch() => Raylib.IsKeyDown(KeyboardKey.W);
 
     public void ShowHitboxes()//enklare att testa programmet och kan hjälpa senare när hitboxes inte matchar spriten
     {
-       /* if (ShowHitboxesSwitch())
+        if (ShowHitboxesSwitch())
         {
             Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, Color.Red);
-        }*/
+        }
     }
+
     //returnar objektet som kollideras med 
-    public MoveableObject CheckCollisions()
+    public MoveableObject? CheckCollisions()
     {
         foreach (MoveableObject obj in gameList)
         {
@@ -50,12 +59,14 @@ abstract class MoveableObject()
         }
     }
 
+
     (float x, float y)[] lastPositions = new (float x, float y)[20];
     int positionIndex = 0;
 
     //denna funktion gjordes av chatgpt
     public void AddTrailEffects(Color trailColorSet, float rMultiplier, float gMultiPlier, float bMultiplier, float aMultiplier)
     {
+
         lastPositions[positionIndex] = (x, y);
         positionIndex = (positionIndex + 1) % lastPositions.Length;
 
@@ -82,7 +93,7 @@ abstract class MoveableObject()
 
 
     //tar bort objekt om de är offscreen
-    public void RemoveObject()
+    public void HandleOffscreen()
     {
         if (canGoOffscreen)
         {
@@ -120,7 +131,7 @@ abstract class MoveableObject()
         y -= ySpeed * Raylib.GetFrameTime();
 
         ApplyGravity(gravity);
-        RemoveObject();
+        HandleOffscreen();
     }
 
     /// <summary>

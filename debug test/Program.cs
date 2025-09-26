@@ -1,6 +1,10 @@
 ﻿global using Raylib_cs;
 global using System;
 
+Setup.LoadSave();
+
+Setup.WriteDictionary(Setup.highscores);
+
 Raylib.SetTargetFPS(Setup.ChooseFPS());
 Setup.Intructions();
 
@@ -12,7 +16,7 @@ new Enemy((int)(Raylib.GetScreenWidth() * 0.5f), 0);
 //main loop
 while (!Raylib.WindowShouldClose())
 {
-    // Console.Clear(); 
+    Console.Clear(); 
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.White);
     for (int i = 0; i < MoveableObject.gameList.Count; i++)
