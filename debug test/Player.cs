@@ -11,7 +11,7 @@ class Player : MoveableObject
     readonly float jumpForce = 1300f;
     readonly float setDashDuration = 0.2f;
     readonly float setDashCooldown = 0.43f;
-    
+
     readonly float fastFallSpeed = 1400f;
     readonly Color color = new Color(12, 0, 235, 255);
 
@@ -20,6 +20,8 @@ class Player : MoveableObject
     readonly float bulletWidth = 40;
     readonly float bulletHeight = 20;
 
+    //statiska variabler
+    public static int score = 0;
 
     //keybinds
     bool LeftKeyPressed() => Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.Left);

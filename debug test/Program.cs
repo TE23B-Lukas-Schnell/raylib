@@ -1,45 +1,40 @@
 ﻿global using Raylib_cs;
 global using System;
 
-Setup.LoadSave();
+Setup.StartGame();
 
-Setup.WriteDictionary(Setup.highscores);
 
-Raylib.SetTargetFPS(Setup.ChooseFPS());
-Setup.Intructions();
-
-Raylib.InitWindow(Setup.windowWidth, Setup.windowHeight, "Game");
-
-new Player(800, 450);
-new Enemy((int)(Raylib.GetScreenWidth() * 0.5f), 0);
 
 //main loop
-while (!Raylib.WindowShouldClose())
+// Setup.GameLoop();
+
+while (1 == 1)
 {
-    Console.Clear(); 
-    Raylib.BeginDrawing();
-    Raylib.ClearBackground(Color.White);
-    for (int i = 0; i < MoveableObject.gameList.Count; i++)
-    {
-        MoveableObject.gameList[i].Update(); //först uppdatera alla värden
-        MoveableObject.gameList[i].Draw(); // sen ritar man ut allt till skärmen
 
-        if (MoveableObject.gameList[i].remove == true)
-        {
-            MoveableObject.gameList[i].Despawn();
-        }
+    Console.WriteLine(@"Choose an action
+1. Start playing
+2. Show your score
+3. Show high scores
+    ");
+    string answer = Console.ReadLine();
+    if (answer == "1")
+    {
+        Setup.WindowGame();
+    }
+    else if (answer == "2")
+    {
+        Console.WriteLine($"Your score is: {Player.score}");
+    }
+    else if (answer == "3")
+    {
+        Setup.WriteDictionary(Setup.highscores);
+    }
+    else
+    {
+        Console.WriteLine("invalid input");
     }
 
-    //denna rad skrevs av mikael 
-    MoveableObject.gameList.RemoveAll(obj => obj.remove == true);
-
-    for (int i = 0; i < MoveableObject.gameList.Count; i++)
-    {
-        Console.WriteLine(MoveableObject.gameList[i]); // gör det enklare att debugga
-    }
-
-    Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 30, Color.Black);
 
 
-    Raylib.EndDrawing();
+
 }
