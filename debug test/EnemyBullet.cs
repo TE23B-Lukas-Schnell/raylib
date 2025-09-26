@@ -1,11 +1,12 @@
-class PlayerBullet : Projectile
+class EnemyBullet : Projectile
 {
-    float gravity = 0;
+    public float gravity;
+
     Color color = new Color(255, 0, 0, 255);
 
     public override void Update()
     {
-        OnHit(damage, "enemy");
+        OnHit(damage, "player");
         MoveObject(gravity);
     }
 
@@ -14,20 +15,22 @@ class PlayerBullet : Projectile
         Raylib.DrawRectangle((int)x, (int)y, (int)width, (int)height, color);
         ShowHitboxes();
     }
-    public override void Despawn()
+     public override void Despawn()
     {
-
+    
     }
 
-    public PlayerBullet(float x, float y, float width, float height)
+    public EnemyBullet(float x, float y, float width, float height, float xSpeed, float ySpeed, float gravity)
     {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        this.gravity = gravity;
         gameList.Add(this);
-        xSpeed = 1800;
         canGoOffscreen = true;
-        damage = 5;
+        damage = 1;
     }
 }

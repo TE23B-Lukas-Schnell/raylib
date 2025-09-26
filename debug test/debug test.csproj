@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Raylib-cs" Version="7.0.1" />
+    <Content Include="scores.txt"  CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
 
 </Project>

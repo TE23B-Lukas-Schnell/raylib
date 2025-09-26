@@ -66,3 +66,4 @@ c:\Users\lukas\OneDrive\Dokument\GitHub\raylib\debug test\obj\Debug\net8.0\refin
 c:\Users\lukas\OneDrive\Dokument\GitHub\raylib\debug test\obj\Debug\net8.0\debug test.pdb
 c:\Users\lukas\OneDrive\Dokument\GitHub\raylib\debug test\obj\Debug\net8.0\debug test.genruntimeconfig.cache
 c:\Users\lukas\OneDrive\Dokument\GitHub\raylib\debug test\obj\Debug\net8.0\ref\debug test.dll
+C:\Users\lukas.schnell\Documents\programmering 1\raylib\debug test\bin\Debug\net8.0\scores.txt
